@@ -1,38 +1,238 @@
-.App {
-  text-align: center;
+*{
+    box-sizing: border-box;
+}
+.App{
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+a{
+    text-decoration: none;
+}
+.App-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 150px;
+}
+.App-header .logo{
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: black;
+}
+.App-nav{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+.App-nav a{
+    color: black;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+.AllPosts{
+    margin: auto;
+    display: block;
+    width: 100%;
+    max-width: 960px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.post{
+    margin: 20px auto;
+    width: 800px;
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 20px;
+}
+@media (max-width: 800px){
+    .post{
+        grid-template-columns: 1fr;
+        width: 80%;
+        margin-left: 10%;
+    }
+}
+@media (max-width: 431px){
+    .post{
+        grid-template-columns: 1fr;
+        width: 90%;
+        margin-left: 5%;
+    }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.post img{
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+div.post p.info{
+    margin: 6px 0;
+    color: #aaa;
+    font-size: .95rem;
+    font-weight: bold;
+    display: flex;
+    gap: 10px;
+}
+div.post .texts a{
+    text-decoration: none;
+    color: black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+div.post p.info .author{
+    text-decoration: none;
+    color: #333;
 }
 
-.App-link {
-  color: #61dafb;
+div.post p.summary{
+    margin: 10px 0;
+    line-height: 1.4rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form.login, form.register{
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+input{
+    display: block;
+    margin-bottom: 5px;
+    padding: 5px 7px;
+    width: 100%;
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+button{
+    width: 100%;
+    display: block;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 10px;
+}
+
+form.login h1, form.register h1{
+    text-align: center;
+}
+
+div.post-page{
+    max-width: 100%;
+    width: 80%;
+    margin: 50px 10%;
+}
+
+div.post-page .image{
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    overflow: hidden;
+    display: flex;
+}
+div.post-page .image img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+div.post-page a{
+    color: #333;
+    text-decoration: underline;
+    transition: 200ms ease-in-out;
+}
+div.post-page a:hover{
+    color: blue;
+}
+div.post-page h1{
+    text-align: center;
+}
+.info-article{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+}
+.info-article .author{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+.info-article time{
+    font-size: .8rem;
+    color: #aaa;
+}
+
+div.post-page div.content p{
+    line-height: 1.5rem;
+}
+
+div.edit-block{
+    margin: 20px 0;
+    text-align: right;
+    padding: 20px 0;
+}
+
+div.edit-block a.edit-btn{
+    background-color: #555;
+    color: white;
+    border-radius: 10px;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+div.edit-block a.edit-btn svg{
+    height: 20px;
+}
+
+div.delete-block{
+    float: right;
+    margin: 0 10px;
+}
+
+div.edit-block .delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 14px 20px;}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+.profile-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.posts-list {
+    list-style: none;
+    padding: 0;
+}
+
+.post-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.post-item.deleted {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
+.deleted-tag {
+    color: red;
+    font-weight: bold;
+    margin-left: 10px;
 }

@@ -2,6 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {Link, useParams, useNavigate} from "react-router-dom";
 import {formatISO9075} from "date-fns";
 import {UserContext} from "../UserContext";
+import Comments from '../components/Comments';
 
 export default function PostPage(){
     const [postInfo,setPostInfo]=useState(null);
@@ -9,26 +10,34 @@ export default function PostPage(){
     const {id} = useParams();
     const navigate = useNavigate();
     useEffect(()=>{
-        fetch(`http://localhost:4000/post/${id}`)
-            .then(res=>{
-                res.json().then(postInfo => {
-                    setPostInfo(postInfo);
-                })
+        fetch(`http://localhost:4000/api/posts/${id}`)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch post: ${res.status}`);
+                }
+                return res.json();
             })
-    }, [])
+            .then(postInfo => {
+                setPostInfo(postInfo);
+            })
+            .catch(err => {
+                console.error('Error fetching post:', err);
+                alert('Failed to load the post. Please try again later.');
+            });
+    }, [id]);
     const deletePost = async () => {
         const confirmDelete = window.confirm('Are you sure you want to delete this post?');
         if (!confirmDelete) return;
 
         try {
-            const response = await fetch(`http://localhost:4000/post/${id}`, {
+            const response = await fetch(`http://localhost:4000/api/posts/${id}`, {
                 method: 'DELETE',
-                credentials: 'include', // Для отправки cookie
+                credentials: 'include', // For cookie
             });
 
             if (response.ok) {
                 alert('Post deleted successfully');
-                navigate('/'); // Перенаправление на главную страницу
+                navigate('/');
             } else {
                 const error = await response.json();
                 alert(error.message || 'Failed to delete the post');
@@ -69,6 +78,7 @@ export default function PostPage(){
                 <img src={`http://localhost:4000/${postInfo.cover}`}/>
             </div>
             <div className="content" dangerouslySetInnerHTML={{__html: postInfo.content}}/>
+            <Comments postId={id} />
         </div>
     )
 }

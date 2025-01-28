@@ -12,7 +12,7 @@ export default function EditPost() {
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:4000/post/'+id)
+        fetch(`http://localhost:4000/api/posts/${id}`)
             .then(res =>{
                 res.json().then(postInfo => {
                     setTitle(postInfo.title);
@@ -32,7 +32,7 @@ export default function EditPost() {
         if (files?.[0]){
             data.set('file', files?.[0]);
         }
-        const response = await fetch(`http://localhost:4000/post`, {
+        const response = await fetch(`http://localhost:4000/api/posts/${id}`, {
             method: 'PUT',
             body: data,
             credentials: 'include',
@@ -43,7 +43,7 @@ export default function EditPost() {
     }
 
     if (redirect){
-        return <Navigate to={'/post/'+id}/>
+        return <Navigate to={`/posts/${id}`} />;
     }
     return(
         <div>
@@ -52,16 +52,16 @@ export default function EditPost() {
                        name="title"
                        placeholder={'Title'}
                        value={title}
-                       onChange={ev => setTitle(ev.target.value)}
+                       onChange={(ev) => setTitle(ev.target.value)}
                        required/>
                 <input type="text"
                        name="summary"
                        placeholder={'Summary'}
                        value={summary}
-                       onChange={ev => setSummary(ev.target.value)}
+                       onChange={(ev) => setSummary(ev.target.value)}
                        required/>
                 <input type="file"
-                       onChange={ev => setFiles(ev.target.files)}
+                       onChange={(ev) => setFiles(ev.target.files)}
                 />
                 <Editor
                     onChange={ setContent} value={content}

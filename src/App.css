@@ -236,3 +236,50 @@ div.edit-block .delete-btn {
     font-weight: bold;
     margin-left: 10px;
 }
+
+.CurrencyBlock{
+    position: absolute;
+    left: 50px;
+    top: 200px;
+}
+.comments ul {
+    list-style: none;
+    padding: 0;
+}
+
+.comments li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.comments textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.comments button {
+    margin-right: 5px;
+    padding: 5px 10px;
+}
+
+.profile {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.profile h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.profile p {
+    font-size: 16px;
+    margin: 5px 0;
+}

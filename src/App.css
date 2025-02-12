@@ -283,3 +283,134 @@ div.edit-block .delete-btn {
     font-size: 16px;
     margin: 5px 0;
 }
+
+.edit-profile {
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+.edit-profile h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.edit-profile form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-profile form label {
+    font-weight: bold;
+}
+
+.edit-profile form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.edit-profile form button {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-profile form button:hover {
+    background: #0056b3;
+}
+.comments ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.comments li {
+    margin-bottom: 40px;
+    border-left: 2px solid #ccc;
+    padding-left: 10px;
+}
+
+.reply-button {
+    font-size: 1.2rem;
+    color: #888;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    padding: 0;
+    text-decoration: underline;
+    text-align: right;
+}
+
+.reply-button:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+.comment-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.buttonsBlock{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+.buttonsBlock button{
+    width: 120px;
+    height: 30px;
+}
+
+.like-button {
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #001445;
+    background-color: #77a2f6;
+}
+
+.like-button:hover {
+    transition: transform 0.2s ease;
+    background-color: #0056b3;
+}
+
+.like-button:hover {
+    color: #f6f0f0;
+}
+
+.like-button:active {
+    transform: scale(0.95);
+}
+
+/*.reply-button {*/
+/*    background-color: #f0f0f0;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 5px;*/
+/*    padding: 5px 10px;*/
+/*    cursor: pointer;*/
+/*    font-size: 0.9em;*/
+/*}*/
+
+/*.reply-button:hover {*/
+/*    background-color: #e6e6e6;*/
+/*    transition: background-color 0.2s ease;*/
+/*}*/

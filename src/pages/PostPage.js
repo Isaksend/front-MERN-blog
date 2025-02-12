@@ -9,6 +9,7 @@ export default function PostPage(){
     const {userInfo} = useContext(UserContext)
     const {id} = useParams();
     const navigate = useNavigate();
+
     useEffect(()=>{
         fetch(`http://localhost:4000/api/posts/${id}`)
             .then(res => {
@@ -47,17 +48,21 @@ export default function PostPage(){
             alert('Something went wrong. Please try again later.');
         }
     };
-    if (!postInfo) return '';
+    if (!postInfo) return <p>Loading post...</p>;
+
+    const isAuthor = userInfo && userInfo.id === postInfo.author?._id;
+
+
     return(
         <div className="post-page">
             <h1>{postInfo.title}</h1>
             <div className="info-article">
                 <div className="author">
-                    by @{postInfo.author.username}
+                    by @{postInfo.author?.username || "Unknown"}
                 </div>
                 <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
             </div>
-            {userInfo.id === postInfo.author._id && (
+            {isAuthor && (
                 <div className="edit-block">
                     <Link className="edit-btn" to={`/edit/${postInfo._id}`}>
                         Edit Post

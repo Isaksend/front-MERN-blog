@@ -1,6 +1,5 @@
 import Post from "../components/Post";
 import {useEffect, useState} from "react";
-import CurrencyBlock from "../components/CurrencyBlock";
 
 export default function IndexPage(){
     const [posts, setPosts] = useState([]);
@@ -24,9 +23,6 @@ export default function IndexPage(){
                 {posts.length > 0 && posts.map((post) => (
                     <Post key={post._id} {...post} />
                 ))}
-            </div>
-            <div className="CurrencyBlock">
-               <CurrencyBlock />
             </div>
         </div>
 

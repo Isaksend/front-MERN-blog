@@ -8,7 +8,8 @@ import {UserContextProvider} from "./UserContext";
 import CreatePost from "./pages/CreatePost";
 import PostPage from "./pages/PostPage";
 import EditPost from "./pages/EditPost";
-import UserProfile from './components/UserProfile';
+import Profile from './components/Profile';
+import EditProfile from "./components/EditProfile";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
                     <Route path={'/create'} element={ <CreatePost/> } />
                     <Route path={'/posts/:id'} element={ <PostPage/> } />
                     <Route path={'/edit/:id'} element={ <EditPost/> } />
-                    <Route path="/profile/:id" element={<UserProfile />} />
+                    <Route path={"/profile/:id"} element={<Profile />} />
+                    <Route path={"/edit-profile/:id"} element={<EditProfile />} />
                 </Route>
             </Routes>
         </UserContextProvider>

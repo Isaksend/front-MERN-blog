@@ -62,7 +62,7 @@ export default function Post({_id, title, summary, cover, content, createdAt, up
     return (
         <div className="post">
             <Link to={`/posts/${_id}`}>
-                <img src={'http://localhost:4000/' + cover} alt={cover}/>
+                <img src={'https://back-web-production.up.railway.app/' + cover} alt={cover}/>
             </Link>
             <div className="texts">
                 <Link to={`/posts/${_id}`}>

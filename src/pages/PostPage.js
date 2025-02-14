@@ -11,7 +11,7 @@ export default function PostPage(){
     const navigate = useNavigate();
 
     useEffect(()=>{
-        fetch(`http://localhost:4000/api/posts/${id}`)
+        fetch(`https://back-web-production.up.railway.app/api/posts/${id}`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`Failed to fetch post: ${res.status}`);
@@ -31,7 +31,7 @@ export default function PostPage(){
         if (!confirmDelete) return;
 
         try {
-            const response = await fetch(`http://localhost:4000/api/posts/${id}`, {
+            const response = await fetch(`https://back-web-production.up.railway.app/api/posts/${id}`, {
                 method: 'DELETE',
                 credentials: 'include', // For cookie
             });
@@ -82,7 +82,7 @@ export default function PostPage(){
                 </div>
             )}
             <div className="image">
-                <img src={`http://localhost:4000/${postInfo.cover}`}/>
+                <img src={`https://back-web-production.up.railway.app/${postInfo.cover}`}/>
             </div>
             <div className="content" dangerouslySetInnerHTML={{__html: postInfo.content}}/>
             <Comments postId={id} />

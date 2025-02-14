@@ -10,6 +10,7 @@ export default function Header(){
         fetch('https://back-web-production.up.railway.app/api/users/profile', {
             method: 'GET',
             credentials: 'include',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             }

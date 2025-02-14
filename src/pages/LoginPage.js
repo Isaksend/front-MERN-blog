@@ -28,8 +28,9 @@ export default function LoginPage(){
             date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
             expires = "; expires=" + date.toUTCString();
         }
-        document.cookie = name + "=" + value ;
+        document.cookie = name + "=" + value + expires + "; path=/; Secure; SameSite=None";
     }
+
 
     async function login(ev){
         ev.preventDefault();
@@ -39,16 +40,18 @@ export default function LoginPage(){
                 method: 'POST',
                 body: JSON.stringify({ username, password }),
                 headers: { 'Content-Type': 'application/json' },
-                credentials: 'include', // 🔥 ОБЯЗАТЕЛЬНО! 🔥
+                credentials: 'include',
             });
 
             if (response.ok) {
-                const data = await response.json();
-                setUserInfo(data);
+                const userInfo = await response.json();
+                setUserInfo(userInfo);
 
-                // 🔥 Явно сохраняем токен в куки, если сервер не делает это сам
-                if (data.token) {
-                    setCookie('token', data.token, 7); // Срок хранения 7 дней
+                // Получаем токен из ответа
+                const token = userInfo.token;
+                if (token) {
+                    // Сохраняем токен в `Cookies`
+                    setCookie("token", token, 7);
                 }
 
                 setRedirect(true);

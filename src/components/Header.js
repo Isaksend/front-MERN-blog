@@ -3,16 +3,35 @@ import React, {useContext, useEffect } from "react";
 import {UserContext} from "../UserContext";
 import {useNavigate} from "react-router-dom";
 
+function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+        const [key, value] = cookie.split("=");
+        if (key === name) return value;
+    }
+    return null;
+}
+
 export default function Header(){
     const { setUserInfo, userInfo } = useContext(UserContext);
     const navigate = useNavigate();
+
     useEffect(() => {
-        fetch('https://back-web-production.up.railway.app/api/users/profile', {
-            method: 'GET',
-            credentials: 'include',
-            mode: 'cors',
+        const token = getCookie("token");
+
+        if (!token) {
+            console.warn("Токен отсутствует, пользователь не авторизован.");
+            setUserInfo(null);
+            return;
+        }
+
+        fetch("https://back-web-production.up.railway.app/api/users/profile", {
+            method: "GET",
+            credentials: "include",
+            mode: "cors",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` // Отправляем токен
             }
         })
             .then(response => {
@@ -20,7 +39,7 @@ export default function Header(){
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error('Не удалось загрузить профиль');
+                    throw new Error("Не удалось загрузить профиль");
                 }
             })
             .then(userInfo => {
@@ -28,7 +47,7 @@ export default function Header(){
                 setUserInfo(userInfo);
             })
             .catch(error => {
-                console.error('Ошибка загрузки профиля:', error);
+                console.error("Ошибка загрузки профиля:", error);
                 setUserInfo(null);
             });
     }, [setUserInfo]);

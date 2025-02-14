@@ -3,7 +3,7 @@ function CurrencyRates() {
     const [rates, setRates] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:4000/currency-rates')
+        fetch('https://back-web-production.up.railway.app/currency-rates')
             .then((response) => response.json())
             .then((data) => setRates(data))
             .catch((error) => console.error('Ошибка:', error));

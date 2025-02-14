@@ -10,7 +10,7 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/users/${id}`);
+                const response = await axios.get(`https://back-web-production.up.railway.app/api/users/${id}`);
                 setUser(response.data);
             } catch (err) {
                 setError('Failed to fetch user profile');

@@ -12,7 +12,7 @@ export default function CreatePost(){
     const [redirect, setRedirect] = useState(false);
     const [isAuthorized, setIsAuthorized] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:4000/api/users/profile', {
+        fetch('https://back-web-production.up.railway.app/api/users/profile', {
             credentials: 'include',
         })
             .then(res => res.json())
@@ -43,7 +43,7 @@ export default function CreatePost(){
         }
 
         try {
-            const response = await fetch("http://localhost:4000/api/posts/", {
+            const response = await fetch("https://back-web-production.up.railway.app/api/posts/", {
                 method: 'POST',
                 body: data,
                 credentials: "include",

@@ -14,7 +14,7 @@ export default function Post({_id, title, summary, cover, content, createdAt, up
             return;
         }
 
-        fetch(`http://localhost:4000/api/posts/${_id}`)
+        fetch(`https://back-web-production.up.railway.app/api/posts/${_id}`)
             .then((response) => response.json())
             .then((data) => {
                 setPost(data.post);
@@ -32,7 +32,7 @@ export default function Post({_id, title, summary, cover, content, createdAt, up
         }
 
         try {
-            const response = await fetch(`http://localhost:4000/api/likes/posts/${_id}/like`, {
+            const response = await fetch(`https://back-web-production.up.railway.app/api/likes/posts/${_id}/like`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: userInfo?.id }),
@@ -69,26 +69,14 @@ export default function Post({_id, title, summary, cover, content, createdAt, up
                     <h3>{title}</h3>
                 </Link>
                 <p className="info">
-                    <a href="#" className="author">{author?.username || 'Unknown Author'}</a>
+                    <Link to={`/profile/${author?._id}`} className="author">
+                        {author?.username || 'Unknown Author'}
+                    </Link>
                     <time>{format(new Date(createdAt), 'MMM d, yyyy HH:mm')}</time>
                 </p>
                 <p className="summary">
                     {summary}
                 </p>
-                {/*<button*/}
-                {/*    className="like-button"*/}
-                {/*    onClick={toggleLikePost}*/}
-                {/*    style={{*/}
-                {/*        padding: '5px 10px',*/}
-                {/*        border: '1px solid #ccc',*/}
-                {/*        borderRadius: '4px',*/}
-                {/*        cursor: 'pointer',*/}
-                {/*        backgroundColor: likes.includes(userInfo?.id) ? '#ffdddd' : '#f9f9f9',*/}
-                {/*        color: likes.includes(userInfo?.id) ? '#ff0000' : '#000'*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    {likes.includes(userInfo?.id) ? 'Unlike' : 'Like'} ({likes.length})*/}
-                {/*</button>*/}
             </div>
         </div>
     );

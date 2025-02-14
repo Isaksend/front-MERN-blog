@@ -6,7 +6,7 @@ export default function IndexPage(){
 
     useEffect(() => {
         let ignore = false;
-        fetch("http://localhost:4000/api/posts").then(res =>{
+        fetch("https://back-web-production.up.railway.app/api/posts").then(res =>{
             res.json().then(posts => {
                 if (!ignore) {
                     setPosts(posts);

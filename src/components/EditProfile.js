@@ -8,7 +8,7 @@ function EditProfile( ) {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/users/${id}`)
+        fetch(`https://back-web-production.up.railway.app/api/users/${id}`)
             .then(response => response.json())
             .then(data => {
                 setEmail(data.email || '');
@@ -20,7 +20,7 @@ function EditProfile( ) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:4000/api/users/update/${id}`, {
+        fetch(`https://back-web-production.up.railway.app/api/users/update/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

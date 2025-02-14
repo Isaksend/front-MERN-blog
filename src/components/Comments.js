@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from "../UserContext";
+import {Link} from "react-router-dom";
 
 export default function Comments({ postId }) {
     const [comments, setComments] = useState([]);
@@ -9,7 +10,7 @@ export default function Comments({ postId }) {
 
     useEffect(() => {
         if (!postId) return;
-        fetch(`http://localhost:4000/api/comments/posts/${postId}/comments`)
+        fetch(`https://back-web-production.up.railway.app/api/comments/posts/${postId}/comments`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -33,8 +34,8 @@ export default function Comments({ postId }) {
         }
 
         const url = parentId
-            ? `http://localhost:4000/api/comments/comments/${parentId}/replies`
-            : `http://localhost:4000/api/comments/posts/${postId}/comments`;
+            ? `https://back-web-production.up.railway.app/api/comments/comments/${parentId}/replies`
+            : `https://back-web-production.up.railway.app/api/comments/posts/${postId}/comments`;
 
         try {
             const response = await fetch(url, {
@@ -74,7 +75,7 @@ export default function Comments({ postId }) {
         }
 
         try {
-            const response = await fetch(`http://localhost:4000/api/likes/comments/${commentId}/like`, {
+            const response = await fetch(`https://back-web-production.up.railway.app/api/likes/comments/${commentId}/like`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: userInfo.id }),
@@ -113,7 +114,10 @@ export default function Comments({ postId }) {
             comment && comment.userId ? (
                 <li key={comment._id} className="comment-item" style={{ marginLeft: `${level * 20}px` }}>
                     <p>
-                        <strong>{comment.userId.username || "Unknown User"}</strong> - {new Date(comment.createdAt).toLocaleString()}
+                        <Link to={`/profile/${comment.userId?._id || comment.userId}`} className="author">
+                            <strong>{comment.userId?.username || "Unknown User"}</strong>
+                        </Link>
+                        - {new Date(comment.createdAt).toLocaleString()}
                     </p>
                     <p>{comment.content}</p>
                     <div className="buttonsBlock">

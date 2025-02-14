@@ -7,24 +7,33 @@ export default function Header(){
     const { setUserInfo, userInfo } = useContext(UserContext);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch('http://localhost:4000/api/users/profile', {
+        fetch('https://back-web-production.up.railway.app/api/users/profile', {
+            method: 'GET',
             credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
             .then(response => {
-            if (response.ok) {
-                response.json().then(userInfo => {
-                    setUserInfo(userInfo);
-                });
-            } else {
+                console.log("Ответ сервера:", response);
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Не удалось загрузить профиль');
+                }
+            })
+            .then(userInfo => {
+                console.log("Данные пользователя:", userInfo);
+                setUserInfo(userInfo);
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки профиля:', error);
                 setUserInfo(null);
-            }
-        }).catch(error => {
-            console.error('Ошибка загрузки профиля:', error);
-        });
+            });
     }, [setUserInfo]);
 
     function logout(){
-        fetch('http://localhost:4000/api/users/logout', {
+        fetch('https://back-web-production.up.railway.app/api/users/logout', {
             method: 'POST',
             credentials: 'include',
 

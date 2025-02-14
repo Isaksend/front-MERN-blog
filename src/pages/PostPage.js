@@ -57,8 +57,10 @@ export default function PostPage(){
         <div className="post-page">
             <h1>{postInfo.title}</h1>
             <div className="info-article">
-                <div className="author">
+                <Link to={`/profile/${postInfo.author?._id}`} className="author">
                     by @{postInfo.author?.username || "Unknown"}
+                </Link>
+                <div className="author">
                 </div>
                 <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
             </div>

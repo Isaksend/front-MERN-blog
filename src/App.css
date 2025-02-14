@@ -1,12 +1,6 @@
 *{
     box-sizing: border-box;
 }
-.App{
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-}
 a{
     text-decoration: none;
 }

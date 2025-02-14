@@ -33,7 +33,7 @@ export default function PostPage(){
         try {
             const response = await fetch(`https://back-web-production.up.railway.app/api/posts/${id}`, {
                 method: 'DELETE',
-                credentials: 'include', // For cookie
+                credentials: 'include',
             });
 
             if (response.ok) {

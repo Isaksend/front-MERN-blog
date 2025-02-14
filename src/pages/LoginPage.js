@@ -1,5 +1,5 @@
 import {useContext, useState} from "react";
-import {Navigate} from "react-router-dom";
+import {createCookie, Navigate} from "react-router-dom";
 import {UserContext} from "../UserContext";
 
 export default function LoginPage(){
@@ -32,10 +32,10 @@ export default function LoginPage(){
                 headers: {'Content-Type': 'application/json'},
                 credentials: 'include',
             });
+
             if (response.ok){
                 const userInfo = await response.json();
                 setUserInfo(userInfo);
-                localStorage.setItem('userId', userInfo.id);
                 setRedirect(true);
             }else{
                 setErrorMessage("Invalid username or password");

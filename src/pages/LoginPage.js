@@ -28,7 +28,7 @@ export default function LoginPage(){
             date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
             expires = "; expires=" + date.toUTCString();
         }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure; HttpOnly; SameSite=None";
+        document.cookie = name + "=" + value ;
     }
 
     async function login(ev){

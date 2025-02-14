@@ -21,6 +21,15 @@ export default function LoginPage(){
         setErrorMessage("");
         return true;
     };
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure; HttpOnly; SameSite=None";
+    }
 
     async function login(ev){
         ev.preventDefault();
@@ -28,16 +37,22 @@ export default function LoginPage(){
         try {
             const response = await fetch("https://back-web-production.up.railway.app/api/users/login", {
                 method: 'POST',
-                body: JSON.stringify({username, password}),
-                headers: {'Content-Type': 'application/json'},
-                credentials: 'include',
+                body: JSON.stringify({ username, password }),
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // 🔥 ОБЯЗАТЕЛЬНО! 🔥
             });
 
-            if (response.ok){
-                const userInfo = await response.json();
-                setUserInfo(userInfo);
+            if (response.ok) {
+                const data = await response.json();
+                setUserInfo(data);
+
+                // 🔥 Явно сохраняем токен в куки, если сервер не делает это сам
+                if (data.token) {
+                    setCookie('token', data.token, 7); // Срок хранения 7 дней
+                }
+
                 setRedirect(true);
-            }else{
+            } else {
                 setErrorMessage("Invalid username or password");
             }
         } catch (error) {
